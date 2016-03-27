@@ -3,5 +3,10 @@ extends layout
 block content
 	h1 Logged In
 	h2 Hi #{user.username}
-
+	a(href='/washer') Add Washing Machine
+	br
 	a(href='/signout') Sign out
+	#message
+	if message
+		i
+			h4.text-center.error-message #{message}
