@@ -24,7 +24,7 @@ module.exports = function(passport) {
                         var newUser = new User();
                         newUser.username = username;
                         newUser.password = createHash(password);
-                        newUser.rollno = req.param('rollno');
+                        newUser.rollno = req.body.rollno;
 
                         newUser.save(function(err) {
                             if (err) {

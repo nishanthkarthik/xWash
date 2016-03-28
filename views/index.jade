@@ -1,18 +1,20 @@
 extends layout
  
 block content
-    div.container
+    div.center-align
         div.row
-            div.col-sm-6.col-md-4.col-md-offset-4
-                h1.text-center.login-title Sign in to xWash
-                    div.account-wall
-                        img(class='profile-img', src='https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120')
+            div.col-md-4.col-md-offset-4
+                .panel.panel-primary
+                    .panel-heading
+                        h3.panel-title  Sign in to xWash
+                    .panel-body
+                        img.peopleimg(src='images/people.svg')
                         form(class='form-signin', action='/login', method='POST')
-                            input(type='text', name='username' class='form-control', placeholder='User Name',required, autofocus)
-                            input(type='password', name='password' class='form-control', placeholder='Password', required)
-                            button(class='btn btn-lg btn-primary btn-block', type='submit') Sign in
-                            span.clearfix
-                    a(href='/signup', class='text-center new-account') Create an account
-                    #message
-                    if message
-                        h1.text-center.error-message #{message}
+                            input.form-control.bottom-space-m(type='text', name='username', placeholder='User Name',required, autofocus)
+                            input.form-control.bottom-space-l(type='password', name='password', placeholder='Password', required)
+                            button.btn.btn-primary.bottom-space-l(type='submit') Sign in
+                        a.text-center.bottom-space(href='/signup') Create an account
+
+                        #message
+                            if message
+                                h3 #{message}
