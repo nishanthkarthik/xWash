@@ -1,12 +1,44 @@
 extends layout
 
 block content
-	h1 Logged In
-	h2 Hi #{user.username}
-	a(href='/washer') Add Washing Machine
-	br
-	a(href='/signout') Sign out
-	#message
-	if message
-		i
-			h4.text-center.error-message #{message}
+    .panel.panel-primary
+        .panel-heading
+            .panel-title 
+                h4 Hi #{user.username} #{adminstring} 
+                    a.signout(href='/signout') Sign out
+        .panel-body
+            form(class='form-horizontal', action='/reserve', method='POST')
+                fieldset
+                    legend Reserve your washing machine
+                    .form-group
+                        label.col-md-1.control-label Machine
+                        .col-md-3
+                            select.form-control(name='washer', required)
+                                each val in washers
+                                    option= val.location + ' - ' + val.name
+                    .form-group
+                        label.col-md-1.control-label Date
+                        .col-md-3
+                            input.form-control(type='date', name='date', required)
+                    .form-group
+                        label.col-md-1.control-label From
+                        .col-md-3
+                            input.form-control(type='time', name='from', required)
+                    .form-group
+                        label.col-md-1.control-label To
+                        .col-md-3
+                            input.form-control(type='time', name='to', required)
+                    .form-group
+                        .col-md-10.col-md-offset-1
+                            button.btn.btn-primary(type='submit') Reserve
+                        
+            h3 Your reservations
+
+            ul
+                if user.admin
+                    h5
+                        a(href='/washer') Add Washing Machine
+            #message
+            if message
+                i
+                    h4.text-center.error-message #{message}

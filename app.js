@@ -14,6 +14,7 @@ var initPassport = require('./passport/init');
 initPassport(passport);
 var routes = require('./routes/index')(passport);
 var washer = require('./routes/washer')(passport);
+var reserver = require('./routes/reserver')(passport);
 
 var app = express();
 mongoose.connect(credentials.mongo.url);
@@ -48,6 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/washer', washer);
+app.use('/reserve', reserver);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

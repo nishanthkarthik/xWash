@@ -28,3 +28,12 @@ a {
 .bottom-space-l {
 	margin-bottom: 20px;
 }
+
+.signout {
+	float: right;
+	color: white;
+}
+
+.signout:hover {
+	color: white;
+}
