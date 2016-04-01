@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var washer = require('../models/washer');
+var moment = require('moment');
 
 var isAuthenticated = function(req, res, next) {
 	if (req.isAuthenticated())
@@ -46,7 +47,27 @@ module.exports = function(passport) {
 				console.log(err);
 				throw err;
 			}
+
+			var reservationList = [];
+
+			for (i = 0; i < washers.length; ++i) {
+				for (j = 0; j < washers[i].reserver.length; ++j) {
+					if (washers[i].reserver[j].username == req.user.username)
+						reservationList.push({
+							machineName: washers[i].location,
+							date: moment(washers[i].reserver[j].starttime).utc().local().format('Do MMM Y'),
+							fromTime: moment(washers[i].reserver[j].starttime).utc().local().format('hh:mm a'),
+							toTime: moment(washers[i].reserver[j].endtime).utc().local().format('hh:mm a'),
+							reservationKey : washers[i].reserver[j].key
+						});
+				}
+			}
+
+			console.log('reservers');
+			console.log(reservationList);
+
 			res.render('home', {
+				reservers: reservationList,
 				user: req.user,
 				washers: washers,
 				message: req.flash('message')

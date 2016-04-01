@@ -33,6 +33,22 @@ block content
                             button.btn.btn-primary(type='submit') Reserve
                         
             h3 Your reservations
+            table.table.table-striped.table-hover
+                thead
+                    tr
+                        th Machine
+                        th Date
+                        th From
+                        th To
+                        th Key
+                tbody
+                    each val in reservers
+                        tr
+                            td= val.machineName
+                            td= val.date
+                            td= val.fromTime
+                            td= val.toTime
+                            td= val.reservationKey
 
             ul
                 if user.admin
