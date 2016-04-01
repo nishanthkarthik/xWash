@@ -10,13 +10,50 @@ var isAuthenticated = function(req, res, next) {
 }
 
 //validate + Date = valiDate
-function valiDate(data, done) {
+function valiDate(data, rUser, done) {
     if (!(('washer' in data) && ('date' in data) && ('from' in data) && ('to' in data))) {
         done('One or more inputs missing');
         return;
-    } else {
-        done(null, 'samplekey');
     }
+
+    var t_now = moment();
+    var t_from = moment(data.date + ' ' + data.from);
+    var t_to = moment(data.date + ' ' + data.to);
+
+    if (!(t_from.isAfter(t_now) && t_to.isAfter(t_now) && t_to.isAfter(t_from))) {
+        done('Reservation timings must be for the future / To time must be after From time');
+    }
+
+    if (washer.findOne({
+            location: data.washer
+        }, function(err, machine) {
+            if (err) {
+                console.log(err);
+                done('internal error');
+                return;
+            } else if (!machine) {
+                done('Washing machine not found');
+                return;
+            } else {
+                var randomKey = Math.floor(Math.random() * 900000) + 100000;
+                machine.reserver.push({
+                    username: rUser.username,
+                    key: randomKey,
+                    starttime: t_from,
+                    endtime: t_to
+                });
+                machine.save(function(err) {
+                    if (err) {
+                        console.log(err);
+                        done('internal update error');
+                    }
+                    done(null, randomKey);
+                });
+            }
+
+
+
+        }));
 }
 
 module.exports = function(passport) {
@@ -29,7 +66,7 @@ module.exports = function(passport) {
 
     router.post('/', isAuthenticated, function(req, res) {
         console.log(req.body);
-        valiDate(req.body, function(err, key) {
+        valiDate(req.body, req.user, function(err, key) {
             if (err) {
                 console.log(err);
                 req.flash('message', err)
