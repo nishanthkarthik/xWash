@@ -44,7 +44,8 @@ block content
                 tbody
                     each val in reservers
                         tr
-                            td= val.machineName
+                            td
+                                a(href=val.machineId) #{val.machineName}
                             td= val.date
                             td= val.fromTime
                             td= val.toTime

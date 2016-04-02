@@ -54,6 +54,7 @@ module.exports = function(passport) {
 				for (j = 0; j < washers[i].reserver.length; ++j) {
 					if (washers[i].reserver[j].username == req.user.username)
 						reservationList.push({
+							machineId: '/slots/' + washers[i].name,
 							machineName: washers[i].location,
 							date: moment(washers[i].reserver[j].starttime).utc().local().format('Do MMM Y'),
 							fromTime: moment(washers[i].reserver[j].starttime).utc().local().format('hh:mm a'),
