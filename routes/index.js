@@ -63,8 +63,8 @@ module.exports = function(passport) {
 				}
 			}
 
-			console.log('reservers');
-			console.log(reservationList);
+			//console.log('reservers');
+			//console.log(reservationList);
 
 			res.render('home', {
 				reservers: reservationList,
