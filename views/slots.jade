@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    .panel.panel-primary
+        .panel-heading
+            .panel-title 
+                h4 Reservations at Machine #{machineName} 
+                    a.signout(href='/home') Home
+        .panel-body
+            table.table.table-striped.table-hover
+                thead
+                    tr
+                        th User
+                        th Date
+                        th From
+                        th To
+                tbody
+                    each val in slots
+                        tr
+                            td= val.userName
+                            td= val.date
+                            td= val.fromTime
+                            td= val.toTime
+            #message
+            if message
+                i
+                    h4.text-center.error-message #{message}
