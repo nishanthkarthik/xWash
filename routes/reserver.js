@@ -48,13 +48,6 @@ function valiDate(data, rUser, done) {
                 var slot_from = moment(machine.reserver[i].starttime);
                 var slot_to = moment(machine.reserver[i].endtime);
 
-                console.log({
-                    t_from: t_from.unix(),
-                    t_to: t_to.unix(),
-                    slot_from: slot_from.unix(),
-                    slot_to: slot_to.unix()
-                });
-
                 if (t_from.unix() < slot_to.unix() && slot_from.unix() < t_to.unix()) {
                     console.log('interference in time slot found');
                     done('The slots interfere with previous reservations');
