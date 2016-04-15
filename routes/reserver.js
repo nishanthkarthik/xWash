@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express');
 var router = express.Router();
 var washer = require('../models/washer');
@@ -37,7 +39,7 @@ function valiDate(data, rUser, done) {
                 return;
             }
 
-            for (i = 0; i < machine.reserver.length; ++i) {
+            for (var i = 0; i < machine.reserver.length; ++i) {
                 // Check for overlap between two time intervals 
                 // t_from -> t_to
                 // machine.reserver[i].starttime -> ..endtime

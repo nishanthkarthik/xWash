@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express');
 var moment = require('moment');
 var router = express.Router();
@@ -33,7 +35,7 @@ module.exports = function(passport) {
             }
 
             var slotsReserved = [];
-            for (i = 0; i < machine.reserver.length; ++i) {
+            for (var i = 0; i < machine.reserver.length; ++i) {
                 slotsReserved.push({
                     userName: machine.reserver[i].username,
                     date: moment(machine.reserver[i].starttime).utc().local().format('Do MMM Y'),

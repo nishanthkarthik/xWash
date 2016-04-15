@@ -1,3 +1,5 @@
+"use strict";
+
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/user');
 var bCrypt = require('bcrypt-nodejs');
@@ -9,7 +11,7 @@ module.exports = function(passport) {
         },
         function(req, username, password, done) {
 
-            findOrCreateUser = function() {
+            var findOrCreateUser = function() {
                 User.findOne({
                     'username': username
                 }, function(err, user) {

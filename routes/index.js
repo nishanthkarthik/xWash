@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express');
 var router = express.Router();
 var washer = require('../models/washer');
@@ -50,8 +52,8 @@ module.exports = function(passport) {
 
 			var reservationList = [];
 
-			for (i = 0; i < washers.length; ++i) {
-				for (j = 0; j < washers[i].reserver.length; ++j) {
+			for (var i = 0; i < washers.length; ++i) {
+				for (var j = 0; j < washers[i].reserver.length; ++j) {
 					if (washers[i].reserver[j].username == req.user.username)
 						reservationList.push({
 							machineId: '/slots/' + washers[i].name,

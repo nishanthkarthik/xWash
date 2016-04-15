@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express');
 var moment = require('moment');
 var router = express.Router();
@@ -32,7 +34,7 @@ module.exports = function(passport) {
             //console.log(machine);
             
             t_now = moment();
-            for (i = 0; i < machine.reserver.length; ++i) {
+            for (var i = 0; i < machine.reserver.length; ++i) {
                 var slot_start = moment(machine.reserver[i].starttime);
                 var slot_end = moment(machine.reserver[i].endtime);
                 if (t_now.isSameOrAfter(slot_start) && t_now.isSameOrBefore(slot_end)) {
