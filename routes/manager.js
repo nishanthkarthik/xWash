@@ -33,7 +33,7 @@ module.exports = function(passport) {
 
             //console.log(machine);
             
-            t_now = moment();
+            var t_now = moment();
             for (var i = 0; i < machine.reserver.length; ++i) {
                 var slot_start = moment(machine.reserver[i].starttime);
                 var slot_end = moment(machine.reserver[i].endtime);
